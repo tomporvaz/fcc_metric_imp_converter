@@ -29,24 +29,27 @@ suite('Unit Tests', function(){
     });
     
     test('Fractional Input', function(done) {
-      const input = '32.1/10mi';
-      assert.equal(convertHandler.getNum(input), 32.1/10);
+      const input = '1/10mi';
+      assert.equal(convertHandler.getNum(input), '1/10');
       done();
     });
     
     test('Fractional Input w/ Decimal', function(done) {
-      
-      //done();
+      const input = '2.1gal';
+      assert.equal(convertHandler.getNum(input), 2.1);
+      done();
     });
     
     test('Invalid Input (double fraction)', function(done) {
-      
-      //done();
+      const input = '1/2.6/7gal';
+      assert.equal(convertHandler.getNum(input), 'invalid number');
+      done();
     });
     
     test('No Numerical Input', function(done) {
-      
-      //done();
+      const  input = 'gal';
+      assert.equal(convertHandler.getNum(input), 1);
+      done();
     }); 
     
   });
