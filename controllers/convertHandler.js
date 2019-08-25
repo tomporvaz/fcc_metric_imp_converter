@@ -9,12 +9,20 @@
 function ConvertHandler() {
   
   this.getNum = function(input) {
-    var result;
+    const result;
+    const validNumRegex = /^(-?\d+\.\d+\/?\d?)$|^(-?\d+\/?\d?)$/gm;
     const indexOfUnit = input.search(/[a-z]/i);
+
     console.log(`indexOfUnit: ${indexOfUnit}`);
     result = input.slice(0, indexOfUnit);
     console.log(`getNum Result: ${result}`);
-    return result;
+    if(validNumRegex.test(result)){
+      return result;
+    } else if (result === null){
+      return 1;
+    } else {
+      return 'invalid number';
+    };
   };
   
   this.getUnit = function(input) {
