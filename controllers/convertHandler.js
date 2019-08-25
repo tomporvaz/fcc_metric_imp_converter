@@ -10,7 +10,9 @@ function ConvertHandler() {
   
   this.getNum = function(input) {
     var result;
-    
+    const indexOfUnit = input.search('gal'|'lbs'|'mi');
+    console.log(`indexOfUnit: ${indexOfUnit}`);
+    result = input.slice(0, indexOfUnit);
     return result;
   };
   
