@@ -15,12 +15,14 @@ function ConvertHandler() {
 
     console.log(`indexOfUnit: ${indexOfUnit}`);
     result = input.slice(0, indexOfUnit);
-    console.log(`getNum Result: ${result}`);
     if(validNumRegex.test(result)){
+      console.log(`getNum return: ${result}`);
       return result;
-    } else if (result === null){
+    } else if (!result){
+      console.log(`getNum return: 1`);
       return 1;
     } else {
+      console.log(`getNum return: invalid number`);
       return 'invalid number';
     };
   };
