@@ -9,8 +9,8 @@
 function ConvertHandler() {
   
   this.getNum = function(input) {
-    const result;
-    const validNumRegex = /^(-?\d+\.\d+\/?\d?)$|^(-?\d+\/?\d?)$/gm;
+    var result;
+    const validNumRegex = /^(-?\d+\.\d+\/?\d*)$|^(-?\d+\/?\d*)$/gm;
     const indexOfUnit = input.search(/[a-z]/i);
 
     console.log(`indexOfUnit: ${indexOfUnit}`);
@@ -29,8 +29,19 @@ function ConvertHandler() {
   
   this.getUnit = function(input) {
     var result;
-    
-    return result;
+    const indexOfUnit = input.search(/[a-z]/i);
+    const validUnits = ['gal','l','mi','km','lbs','kg','GAL','L','MI','KM','LBS','KG'];
+
+    console.log(`indexOfUnit: ${indexOfUnit}`);
+    result = input.slice(indexOfUnit);
+    console.log(`getUnit return: ${result}`);
+
+    if (validUnits.includes(result)){
+      return result;
+    } else {
+      console.log(`getUnit return: invalid unit`);
+      return 'invalid unit';
+    }
   };
   
   this.getReturnUnit = function(initUnit) {
