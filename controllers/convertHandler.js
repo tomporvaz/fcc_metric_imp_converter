@@ -46,8 +46,13 @@ function ConvertHandler() {
   
   this.getReturnUnit = function(initUnit) {
     var result;
-    
-    return result;
+    const keyObj = {
+      'gal': 'l',
+      'l': 'gal'
+    }
+    const initUnitLowercase = initUnit.toLowerCase();
+   
+    return keyObj.initUnitLowercase;
   };
 
   this.spellOutUnit = function(unit) {
