@@ -48,11 +48,17 @@ function ConvertHandler() {
     var result;
     const keyObj = {
       'gal': 'l',
-      'l': 'gal'
+      'l': 'gal',
+      'mi': 'km',
+      'km': 'mi',
+      'lbs': 'kg',
+      'kg': 'lbs'
     }
+
+    console.log(`initUnit: ${initUnit}`)
     const initUnitLowercase = initUnit.toLowerCase();
-   
-    return keyObj.initUnitLowercase;
+    console.log(`getReturnUnit return ${keyObj[initUnitLowercase]}`)
+    return keyObj[initUnitLowercase];
   };
 
   this.spellOutUnit = function(unit) {
