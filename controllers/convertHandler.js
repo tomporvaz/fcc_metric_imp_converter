@@ -45,7 +45,6 @@ function ConvertHandler() {
   };
   
   this.getReturnUnit = function(initUnit) {
-    var result;
     const keyObj = {
       'gal': 'l',
       'l': 'gal',
@@ -62,9 +61,16 @@ function ConvertHandler() {
   };
 
   this.spellOutUnit = function(unit) {
-    var result;
-    
-    return result;
+    const keyObj = {
+      'gal': 'gallons',
+      'l': 'litters',
+      'mi': 'miles',
+      'km': 'kilometers',
+      'lbs': 'pounds',
+      'kg': 'kilograms'
+    };
+
+    return keyObj[unit];
   };
   
   this.convert = function(initNum, initUnit) {
