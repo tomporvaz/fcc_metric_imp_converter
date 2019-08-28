@@ -78,7 +78,17 @@ function ConvertHandler() {
     const lbsToKg = 0.453592;
     const miToKm = 1.60934;
     var result;
-    
+    const conversionFactor = {
+      'gal': galToL,
+      'l': 1/galToL,
+      'mi': miToKm,
+      'km': 1/miToKm,
+      'lbs': lbsToKg,
+      'kg': 1/lbsToKg
+    }
+
+    result = initNum * conversionFactor[initUnit];
+       
     return result;
   };
   
