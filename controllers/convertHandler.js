@@ -77,7 +77,7 @@ function ConvertHandler() {
     const galToL = 3.78541;
     const lbsToKg = 0.453592;
     const miToKm = 1.60934;
-    var result;
+
     const conversionFactor = {
       'gal': galToL,
       'l': 1/galToL,
@@ -87,9 +87,20 @@ function ConvertHandler() {
       'kg': 1/lbsToKg
     }
 
-    result = initNum * conversionFactor[initUnit];
-       
-    return result;
+    //convert complex fractions to decimal number
+    const complexFractionRegEx = /^(\d+\.\d*\/\d+)$/;
+    
+    if(complexFractionRegEx.test(initNum)){
+      const indexOfDecimal = initNum.search('.');
+      const integer = initNum.slice(0, indexOfDecimal);
+      const fraction = initNum.slice(indexOfDecimal);
+      const splitFraction = fraction.split('/');
+      const fractionDecimal = parseInt(splitFraction[0], 10) / parseInt(splitFraction[1], 10);
+      const decimalNumber = interger + fractionDecimal;
+      return decimalNumber * conversionFactor[initUnit];
+    } 
+    
+    return initNum * conversionFactor[initUnit];
   };
   
   this.getString = function(initNum, initUnit, returnNum, returnUnit) {
