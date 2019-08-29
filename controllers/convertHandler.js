@@ -111,12 +111,14 @@ function ConvertHandler() {
     }  else {
 
       return initNum * conversionFactor[initUnit];
-      
+
     }
   };
   
   this.getString = function(initNum, initUnit, returnNum, returnUnit) {
-    var result;
+    var result = (
+      `${initNum} ${spellOutUnit(initUnit)} converts to ${returnNum} ${spellOutUnit(returnUnit)}`
+      );
     
     return result;
   };
