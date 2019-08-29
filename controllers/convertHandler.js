@@ -89,18 +89,30 @@ function ConvertHandler() {
 
     //convert complex fractions to decimal number
     const complexFractionRegEx = /^(\d+\.\d*\/\d+)$/;
-    
     if(complexFractionRegEx.test(initNum)){
-      const indexOfDecimal = initNum.search('.');
+      const indexOfDecimal = initNum.search(/\./); 
       const integer = initNum.slice(0, indexOfDecimal);
-      const fraction = initNum.slice(indexOfDecimal);
+      const fraction = initNum.slice(indexOfDecimal + 1);
       const splitFraction = fraction.split('/');
       const fractionDecimal = parseInt(splitFraction[0], 10) / parseInt(splitFraction[1], 10);
-      const decimalNumber = interger + fractionDecimal;
+      const decimalNumber = parseInt(integer, 10) + fractionDecimal; 
+      
+      console.log(`initNum: ${initNum}; typeOf initNum: ${typeof(initNum)}`)
+      console.log(`indexOfDecimal: ${indexOfDecimal}`);
+      console.log(`integer: ${integer}`);
+      console.log(`fraction: ${fraction}`);
+      console.log(`splitFraction: ${splitFraction}`);
+      console.log(`fractionDecimal: ${fractionDecimal}`);
+      console.log(`decimalNumber ${decimalNumber}`);
+      console.log(`return from complexFraction: ${decimalNumber * conversionFactor[initUnit]}`)
+      
       return decimalNumber * conversionFactor[initUnit];
-    } 
-    
-    return initNum * conversionFactor[initUnit];
+
+    }  else {
+
+      return initNum * conversionFactor[initUnit];
+      
+    }
   };
   
   this.getString = function(initNum, initUnit, returnNum, returnUnit) {
