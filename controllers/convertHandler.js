@@ -77,6 +77,7 @@ function ConvertHandler() {
     const galToL = 3.78541;
     const lbsToKg = 0.453592;
     const miToKm = 1.60934;
+    var result;
 
     const conversionFactor = {
       'gal': galToL,
@@ -106,14 +107,14 @@ function ConvertHandler() {
       console.log(`decimalNumber ${decimalNumber}`);
       console.log(`return from complexFraction: ${decimalNumber * conversionFactor[initUnit]}`)
       
-      return decimalNumber * conversionFactor[initUnit];
+      result =  decimalNumber * conversionFactor[initUnit];
 
-    }  else {
+    }  else {result = initNum * conversionFactor[initUnit]}
 
-      return initNum * conversionFactor[initUnit];
-
-    }
+    //rounding with exponents as recommended by Jack L Moore .com
+    return Number(Math.round((result) + 'e5') +'e-5');
   };
+
   
   this.getString = function(initNum, initUnit, returnNum, returnUnit) {
     var result = (
