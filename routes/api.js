@@ -10,10 +10,7 @@
 
 var expect = require('chai').expect;
 var ConvertHandler = require('../controllers/convertHandler.js');
-const bodyParser = require('body-parser');
 
-app.use(bodyParser.urlencoded({extended: false}))
-app.use(bodyParser.json())
 
 module.exports = function (app) {
   
