@@ -70,13 +70,14 @@ function ConvertHandler() {
       'kg': 'kilograms'
     };
 
-    return keyObj[unit];
+    return keyObj[unit.toLowerCase()];
   };
   
   this.convert = function(initNum, initUnit) {
     const galToL = 3.78541;
     const lbsToKg = 0.453592;
     const miToKm = 1.60934;
+    const lowercaseInitUnit = initUnit.toLowerCase();
     var result;
 
     const conversionFactor = {
@@ -107,9 +108,9 @@ function ConvertHandler() {
       console.log(`decimalNumber ${decimalNumber}`);
       console.log(`return from complexFraction: ${decimalNumber * conversionFactor[initUnit]}`)
       
-      result =  decimalNumber * conversionFactor[initUnit];
+      result =  decimalNumber * conversionFactor[lowercaseInitUnit];
 
-    }  else {result = initNum * conversionFactor[initUnit]}
+    }  else {result = initNum * conversionFactor[lowercaseInitUnit]}
 
     //rounding with exponents as recommended by Jack L Moore .com
     return Number(Math.round((result) + 'e5') +'e-5');
