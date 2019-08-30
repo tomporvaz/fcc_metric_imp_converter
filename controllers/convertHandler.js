@@ -17,23 +17,24 @@ function ConvertHandler() {
     console.log(`indexOfUnit: ${indexOfUnit}`);
     result = input.slice(0, indexOfUnit);
     if(validNumRegex.test(result)){
+      console.log(`${result} is a valid number!`);
       //convert complex fractions to decimal number
       if(complexFractionRegEx.test(result)){
-        const indexOfDecimal = initNum.search(/\./); 
-        const integer = initNum.slice(0, indexOfDecimal);
-        const fraction = initNum.slice(indexOfDecimal + 1);
-        const splitFraction = fraction.split('/');
+        //const indexOfDecimal = result.search(/\./); 
+        //const integer = result.slice(0, indexOfDecimal);
+        //const fraction = result.slice(indexOfDecimal + 1);
+        const splitFraction = result.split('/');
         const fractionDecimal = parseInt(splitFraction[0], 10) / parseInt(splitFraction[1], 10);
         const decimalNumber = parseInt(integer, 10) + fractionDecimal; 
         
-        console.log(`initNum: ${initNum}; typeOf initNum: ${typeof(initNum)}`)
+        console.log(`result: ${result}; typeOf initNum: ${typeof(initNum)}`)
         console.log(`indexOfDecimal: ${indexOfDecimal}`);
         console.log(`integer: ${integer}`);
         console.log(`fraction: ${fraction}`);
         console.log(`splitFraction: ${splitFraction}`);
         console.log(`fractionDecimal: ${fractionDecimal}`);
         console.log(`decimalNumber ${decimalNumber}`);
-        console.log(`return from complexFraction: ${decimalNumber * conversionFactor[initUnit]}`)
+
         return decimalNumber;
       } else {
         console.log(`getNum return: ${result}`);
