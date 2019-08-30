@@ -63,7 +63,7 @@ function ConvertHandler() {
   this.spellOutUnit = function(unit) {
     const keyObj = {
       'gal': 'gallons',
-      'l': 'litters',
+      'l': 'liters',
       'mi': 'miles',
       'km': 'kilometers',
       'lbs': 'pounds',
