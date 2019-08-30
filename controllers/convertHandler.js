@@ -12,12 +12,34 @@ function ConvertHandler() {
     var result;
     const validNumRegex = /^(-?\d+\.\d+\/?\d*)$|^(-?\d+\/?\d*)$/gm;
     const indexOfUnit = input.search(/[a-z]/i);
-
+    const complexFractionRegEx = /^(\d+\.\d*\/\d+)$/;
+    
     console.log(`indexOfUnit: ${indexOfUnit}`);
     result = input.slice(0, indexOfUnit);
     if(validNumRegex.test(result)){
-      console.log(`getNum return: ${result}`);
-      return result;
+      //convert complex fractions to decimal number
+      if(complexFractionRegEx.test(result)){
+        const indexOfDecimal = initNum.search(/\./); 
+        const integer = initNum.slice(0, indexOfDecimal);
+        const fraction = initNum.slice(indexOfDecimal + 1);
+        const splitFraction = fraction.split('/');
+        const fractionDecimal = parseInt(splitFraction[0], 10) / parseInt(splitFraction[1], 10);
+        const decimalNumber = parseInt(integer, 10) + fractionDecimal; 
+        
+        console.log(`initNum: ${initNum}; typeOf initNum: ${typeof(initNum)}`)
+        console.log(`indexOfDecimal: ${indexOfDecimal}`);
+        console.log(`integer: ${integer}`);
+        console.log(`fraction: ${fraction}`);
+        console.log(`splitFraction: ${splitFraction}`);
+        console.log(`fractionDecimal: ${fractionDecimal}`);
+        console.log(`decimalNumber ${decimalNumber}`);
+        console.log(`return from complexFraction: ${decimalNumber * conversionFactor[initUnit]}`)
+        return decimalNumber;
+      } else {
+        console.log(`getNum return: ${result}`);
+        return result; 
+      }
+      
     } else if (!result){
       console.log(`getNum return: 1`);
       return 1;
@@ -27,15 +49,17 @@ function ConvertHandler() {
     };
   };
   
+  
+  
   this.getUnit = function(input) {
     var result;
     const indexOfUnit = input.search(/[a-z]/i);
     const validUnits = ['gal','l','mi','km','lbs','kg','GAL','L','MI','KM','LBS','KG'];
-
+    
     console.log(`indexOfUnit: ${indexOfUnit}`);
     result = input.slice(indexOfUnit);
     console.log(`getUnit return: ${result}`);
-
+    
     if (validUnits.includes(result)){
       return result;
     } else {
@@ -53,13 +77,13 @@ function ConvertHandler() {
       'lbs': 'kg',
       'kg': 'lbs'
     }
-
+    
     console.log(`initUnit: ${initUnit}`)
     const initUnitLowercase = initUnit.toLowerCase();
     console.log(`getReturnUnit return ${keyObj[initUnitLowercase]}`)
     return keyObj[initUnitLowercase];
   };
-
+  
   this.spellOutUnit = function(unit) {
     const keyObj = {
       'gal': 'gallons',
@@ -69,7 +93,7 @@ function ConvertHandler() {
       'lbs': 'pounds',
       'kg': 'kilograms'
     };
-
+    
     return keyObj[unit.toLowerCase()];
   };
   
@@ -79,7 +103,7 @@ function ConvertHandler() {
     const miToKm = 1.60934;
     const lowercaseInitUnit = initUnit.toLowerCase();
     var result;
-
+    
     const conversionFactor = {
       'gal': galToL,
       'l': 1/galToL,
@@ -88,43 +112,23 @@ function ConvertHandler() {
       'lbs': lbsToKg,
       'kg': 1/lbsToKg
     }
-
-    //convert complex fractions to decimal number
-    const complexFractionRegEx = /^(\d+\.\d*\/\d+)$/;
-    if(complexFractionRegEx.test(initNum)){
-      const indexOfDecimal = initNum.search(/\./); 
-      const integer = initNum.slice(0, indexOfDecimal);
-      const fraction = initNum.slice(indexOfDecimal + 1);
-      const splitFraction = fraction.split('/');
-      const fractionDecimal = parseInt(splitFraction[0], 10) / parseInt(splitFraction[1], 10);
-      const decimalNumber = parseInt(integer, 10) + fractionDecimal; 
-      
-      console.log(`initNum: ${initNum}; typeOf initNum: ${typeof(initNum)}`)
-      console.log(`indexOfDecimal: ${indexOfDecimal}`);
-      console.log(`integer: ${integer}`);
-      console.log(`fraction: ${fraction}`);
-      console.log(`splitFraction: ${splitFraction}`);
-      console.log(`fractionDecimal: ${fractionDecimal}`);
-      console.log(`decimalNumber ${decimalNumber}`);
-      console.log(`return from complexFraction: ${decimalNumber * conversionFactor[initUnit]}`)
-      
-      result =  decimalNumber * conversionFactor[lowercaseInitUnit];
-
-    }  else {result = initNum * conversionFactor[lowercaseInitUnit]}
-
+    
+    result = initNum * conversionFactor[lowercaseInitUnit]
+    
     //rounding with exponents as recommended by Jack L Moore .com
     return Number(Math.round((result) + 'e5') +'e-5');
   };
-
+  
   
   this.getString = function(initNum, initUnit, returnNum, returnUnit) {
     var result = (
       `${initNum} ${this.spellOutUnit(initUnit)} converts to ${returnNum} ${this.spellOutUnit(returnUnit)}`
       );
+      
+      return result;
+    };
     
-    return result;
-  };
+  }
   
-}
-
-module.exports = ConvertHandler;
+  module.exports = ConvertHandler;
+  
