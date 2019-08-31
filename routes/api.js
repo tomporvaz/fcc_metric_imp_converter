@@ -21,18 +21,20 @@ module.exports = function (app) {
     var input = req.query.input;
     var initNum = convertHandler.getNum(input);
     var initUnit = convertHandler.getUnit(input);
+    if(initNum === 'invalid number' && initUnit === 'invalid unit'){
+      res.send('invalid number and unit')
+    }else if(initNum === 'invalid number'){
+      res.send('invalid number')
+    } else if (initUnit === 'invalid unit'){
+      res.send('invalid unit')
+    }
+    
     var returnNum = convertHandler.convert(initNum, initUnit);
     var returnUnit = convertHandler.getReturnUnit(initUnit);
     var toString = convertHandler.getString(initNum, initUnit, returnNum, returnUnit);
     
     //res.json
-    if((typeof(getNum)!=='number') && (getUnit === undefined)){
-      res.send('invalid number and unit')
-    }else if(typeof(getNum) !== 'number'){
-      res.send('invalid unit')
-    } else if (getUnit === undefined){
-      res.send('invalid unit')
-    } else{
+    
       res.json({
         'initNum': initNum,
         'initUnit': initUnit,
@@ -40,7 +42,6 @@ module.exports = function (app) {
         'returnUnit': returnUnit,
         'string': toString
       });
-    }
   });
   
 };
