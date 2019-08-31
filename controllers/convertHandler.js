@@ -20,22 +20,14 @@ function ConvertHandler() {
       console.log(`${result} is a valid number!`);
       //convert complex fractions to decimal number
       if(complexFractionRegEx.test(result)){
-        //const indexOfDecimal = result.search(/\./); 
-        //const integer = result.slice(0, indexOfDecimal);
-        //const fraction = result.slice(indexOfDecimal + 1);
         const splitFraction = result.split('/');
-        const fractionDecimal = parseInt(splitFraction[0], 10) / parseInt(splitFraction[1], 10);
-        const decimalNumber = parseInt(integer, 10) + fractionDecimal; 
-        
+        const fractionDecimal = parseFloat(splitFraction[0]) / parseFloat(splitFraction[1]);
+
         console.log(`result: ${result}; typeOf initNum: ${typeof(initNum)}`)
-        console.log(`indexOfDecimal: ${indexOfDecimal}`);
-        console.log(`integer: ${integer}`);
-        console.log(`fraction: ${fraction}`);
         console.log(`splitFraction: ${splitFraction}`);
         console.log(`fractionDecimal: ${fractionDecimal}`);
-        console.log(`decimalNumber ${decimalNumber}`);
 
-        return decimalNumber;
+        return fractionDecimal;
       } else {
         console.log(`getNum return: ${result}`);
         return result; 
