@@ -12,18 +12,17 @@ function ConvertHandler() {
     var result;
     const validNumRegex = /^(-?\d+\.\d+\/?\d*)$|^(-?\d+\/?\d*)$/gm;
     const indexOfUnit = input.search(/[a-z]/i);
-    const complexFractionRegEx = /^(\d+\.\d*\/\d+)$/;
+    const fractionRegEx = /^(\d+\.?\d*\/\d+)$/;
     
     console.log(`indexOfUnit: ${indexOfUnit}`);
     result = input.slice(0, indexOfUnit);
     if(validNumRegex.test(result)){
       console.log(`${result} is a valid number!`);
-      //convert complex fractions to decimal number
-      if(complexFractionRegEx.test(result)){
+      //convert fractions to decimal number
+      if(fractionRegEx.test(result)){
         const splitFraction = result.split('/');
         const fractionDecimal = parseFloat(splitFraction[0]) / parseFloat(splitFraction[1]);
 
-        console.log(`result: ${result}; typeOf initNum: ${typeof(initNum)}`)
         console.log(`splitFraction: ${splitFraction}`);
         console.log(`fractionDecimal: ${fractionDecimal}`);
 
